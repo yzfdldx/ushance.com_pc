@@ -9,6 +9,7 @@ module.exports = {
   entry: {
       index: "./src/index.jsx", //
       // library: ['react', 'react-dom', 'react-router'], //第三方库
+      // library2: ['antd-mobile'] //第三方库
   },
   output: {
       path: path.join(__dirname, 'public/dist'),

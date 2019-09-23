@@ -1,0 +1,114 @@
+#order {
+  // width: 1250px;
+  min-height: 900px;
+  padding: 0 0 20px;
+  margin: 0 auto;
+
+  .title {
+    border-left: 5px solid #2aad6f;
+    line-height: 30px;
+    padding: 0 0 0 10px;
+    font-size: 30px;
+    margin: 20px 0 15px;
+    font-family: YouYuan;
+  }
+
+  .center {
+    display: flex;
+
+    .center-left {
+      width: 200px;
+      margin-right: 20px;
+
+      .person-info {
+        width: 200px;
+        height: 206px;
+        overflow: hidden;
+        background: #fff;
+
+        .avatar {
+          width: 100px;
+          height: 112px;
+          margin: 0 auto;
+          margin-top: 8px;
+
+          img {
+            width: 100px;
+            height: 112px;
+          }
+        }
+
+        >span {
+          display: inline-block;
+          width: 100%;
+          margin-top: 7px;
+          text-align: center;
+          font-size: 16px;
+          color: #32d693;
+        }
+
+        p {
+          width: 100%;
+          text-align: center;
+          margin-top: 10px;
+          line-height: 18px;
+          font-size: 14px;
+          color: #666;
+        }
+      }
+
+      .remind {
+        width: 200px;
+        margin-top: 20px;
+        background-color: #fffef5;
+        border: 1px solid #fabf7b;
+        position: relative;
+        padding-bottom: 20px;
+
+        .warn {
+          width: 30px;
+          height: 32px;
+          position: absolute;
+          top: 21px;
+          left: 11px;
+        }
+
+        .warn-content {
+          width: 181px;
+          margin: 28px 0 0 10px;
+
+          .remind-title {
+            font-size: 14px;
+            color: #666;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+          }
+
+          p {
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .center-right {
+      flex: 1;
+      background: #fff;
+      padding-bottom: 40px;
+      padding: 20px 40px 40px;
+
+      .demo-loadmore-list {
+        min-height: 350px;
+      }
+
+      .header {
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
