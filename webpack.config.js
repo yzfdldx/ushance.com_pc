@@ -9,7 +9,8 @@ module.exports = function(webpackConfig) {
     style: 'css',
   }]);
   webpackConfig.entry = {
-    index: './src/index.jsx',
+    // index: './src/index.jsx',
+    index: ["babel-polyfill", "./src/index.jsx"]
   }
   // webpackConfig.externals = { // 外部文件引入：script替换import引入；文件中还是import引入
     // 'react':'react',

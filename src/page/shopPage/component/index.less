@@ -1,0 +1,33 @@
+.carousel {
+  width: 200px;
+
+  .img-box {
+    width: 420px;
+    height: 420px;
+    background-color: #ccc;
+    box-sizing: border-box;
+    overflow: hidden;
+    >img{
+      width: 100%;
+    }
+  }
+
+  .bottom-box {
+    width: 420px;
+    padding: 10px 30px;
+
+    .footer-img {
+      width: 83px;
+      height: 83px;
+      background-color: #ccc;
+      border: 1px solid transparent;
+
+      &:hover {
+        border: 1px solid #000;
+      }
+    }
+    .slick-arrow::before{
+      color: rgb(0, 112, 192);
+    }
+  }
+}

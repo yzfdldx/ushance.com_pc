@@ -1,0 +1,27 @@
+#device {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  min-height: 900px;
+  padding: 30px 10px;
+  
+  .dynamic-delete-button {
+    cursor: pointer;
+    position: absolute;
+    top: -2px;
+    font-size: 24px;
+    color: #999;
+    transition: all 0.3s;
+    right: -52px;
+  }
+
+  .dynamic-delete-button:hover {
+    color: #777;
+  }
+
+  .dynamic-delete-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+}

@@ -2,6 +2,8 @@ import React from 'react';
 import { Modal, Input, Form, message } from 'antd';
 import reqwest from 'reqwest';
 
+import { setCookie } from '../common/util.js';
+
 class App extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -14,7 +16,7 @@ class App extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         reqwest({
-          url: 'http://www.ushance.com/web/index/my/load.json',
+          url: 'http://149.129.177.101/web/index/my/load.json',
           method: 'get',
           data: {
             ...values
@@ -23,6 +25,7 @@ class App extends React.Component {
             if (val.result === 'succeed') {
               message.success('登录成功');
               if (val.data && val.data[0]) {
+                setCookie('App', {...val.data[0]}, 1);
                 backFn(val.data[0]);
                 visibleFn();
               }

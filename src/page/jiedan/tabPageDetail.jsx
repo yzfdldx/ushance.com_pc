@@ -25,13 +25,6 @@ class TabPageDetail extends Component {
         TestLen: 1, // 标样数量
         vlaue: {},
         current: 0,
-      }, {
-        title: 'B组样品',
-        Len: 12, // 样品数量
-        TestName: 'as', // 标样名称
-        TestLen: 1, // 标样数量
-        vlaue: {},
-        current: 0,
       }],
       // step1
       TagList: [ // 元素
@@ -506,7 +499,7 @@ class TabPageDetail extends Component {
             </Form>
             <Alert message="本次测试一共需要300元" type="success" />
             <div style={{ textAlign: 'center', marginBottom: '32px', marginTop: '16px' }}>
-              <Button onClick={this.pay} type="primary" style={{ marginRight: '32px' }}>去下单</Button>
+              <Button onClick={this.pay} type="primary" style={{ marginRight: '32px' }}>去发单</Button>
               <Button onClick={this.pay} type="primary" style={{ marginRight: '32px' }}>去支付</Button>
               <Button onClick={this.calFn}>返回</Button>
             </div>

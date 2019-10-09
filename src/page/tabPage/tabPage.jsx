@@ -150,6 +150,15 @@ class TabPage extends Component {
           name4: '外加剂',
         }]
       }, {
+        img: '/img/background/img/6.png',
+        background: '/img/background/7/back1.png',
+        name: '接单',
+        baseA: 85,
+        baseB: 22,
+        height: 70,
+        baseHeight: 88,
+        card: [{name: '问呗', clickUrl: '#jiedanCardList/问呗'}, {name: '帮呗', clickUrl: '#jiedanCardList/帮呗'}],
+      }, {
         img: '/img/background/img/5.png',
         background: '/img/background/6/back1.png',
         name: '商城',
@@ -158,7 +167,7 @@ class TabPage extends Component {
         height: 46,
         baseHeight: 85,
         min: true,
-        card: [{name: '实验室建设'}, {name: '劳防用品'}, {name: '实验设备'}, {name: '矿山设备'}, {name: '化学试剂'}, {name: '外加剂'}, {name: '实验耗材'}, {name: '建材'}],
+        card: [{name: '实验室建设', clickUrl: '/#/ShopPage/BuildMaterial/CardList/实验室建设'}, {name: '劳防用品', clickUrl: '/#/ShopPage/BuildMaterial/CardList/劳防用品'}, {name: '实验设备', clickUrl: '/#/ShopPage/BuildMaterial/CardList/实验设备'}, {name: '矿山设备', clickUrl: '/#/ShopPage/BuildMaterial/CardList/矿山设备'}, {name: '化学试剂', clickUrl: '/#/ShopPage/BuildMaterial/CardList/化学试剂'}, {name: '外加剂', clickUrl: '/#/ShopPage/BuildMaterial/CardList/外加剂'}, {name: '实验耗材', clickUrl: '/#/ShopPage/BuildMaterial/CardList/实验耗材'}, {name: '建材', clickUrl: '/#/ShopPage/BuildMaterial/CardList/建材'}],
         list: [{
           name1: ['溴', '萘', '铜片'],
           name2: ['培养皿', '离心管', '天平'],
@@ -187,22 +196,15 @@ class TabPage extends Component {
           name2: '个人合作者',
         }]
       }, {
-        img: '/img/background/img/7.png',
-        background: '/img/background/8/back1.png',
+        img: '/img/background/img/6.png',
+        background: '/img/background/8/back.png',
         name: '我的',
-        baseA: 63,
-        baseB: 11,
-        height: 46,
-        baseHeight: 80,
+        baseA: 170,
+        baseB: 75,
+        height: 50,
+        baseHeight: 78,
         min: true,
-        card: [{name: '我的课题组'}, {name: '订单及接单'}, {name: '退款维权'}, {name: '购物车'}, {name: '积分及优惠券'}, {name: '安全设置'}, {name: '我的发票'}, {name: '个人资料'}],
-        list: [{
-          name1: ['高校', '科研院所', '检测机构'],
-          name2: ['课题组', '教师', '学生']
-        }, {
-          name1: '机构合作者',
-          name2: '个人合作者',
-        }]
+        card: [{name: '客户', clickUrl: '#/MyPage/Information'}, {name: '订单及接单', clickUrl: '#/MyPage/Order'}, {name: '售后'}],
       }],
     };
   }
@@ -465,25 +467,27 @@ class TabPage extends Component {
           Dom = spellFn(spellList[3], 3);
         break;
       case '5':
-          Dom = <div className="index_receipt">
-            <div>
-              <h3>我要接单</h3>
-              <div>
-                {
-                  this.TableFn(receiptTableData)
-                }
-              </div>
-            </div>
-          </div>
-          break;
+          Dom = spellFn(spellList[4], 4);
+        break;
+          // Dom = <div className="index_receipt">
+          //   <div>
+          //     <h3>我要接单</h3>
+          //     <div>
+          //       {
+          //         this.TableFn(receiptTableData)
+          //       }
+          //     </div>
+          //   </div>
+          // </div>
+          // break;
       case '6':
-          Dom = spellFn(spellList[4], 5);
+          Dom = spellFn(spellList[5], 5);
         break;
       case '7':
-            Dom = spellFn(spellList[5], 6);
+            Dom = spellFn(spellList[6], 6);
           break;
       case '8':
-          Dom = spellFn(spellList[6], 7);
+          Dom = spellFn(spellList[7], 7);
         break;    
       default:
         Dom = ''

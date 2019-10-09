@@ -41,7 +41,7 @@ class App extends React.Component {
         {key: '2', title:'仿真模拟', imgUrl: '/img/head/tab2.png', imgUrlSelect: '/img/head/tab2-1.png'},
         {key: '3', title:'数据分析', imgUrl: '/img/head/tab3.png', imgUrlSelect: '/img/head/tab3-1.png'},
         {key: '4', title:'建材检测', imgUrl: '/img/head/tab4.png', imgUrlSelect: '/img/head/tab4-1.png'},
-        {key: '5', title:'我要接单', imgUrl: '/img/head/tab5.png', imgUrlSelect: '/img/head/tab5-1.png'},
+        {key: '5', title:'接单', imgUrl: '/img/head/tab5.png', imgUrlSelect: '/img/head/tab5-1.png'},
         {key: '6', title:'商城', imgUrl: '/img/head/tab6.png', imgUrlSelect: '/img/head/tab6-1.png'},
         {key: '7', title:'合作', imgUrl: '/img/head/tab7.png', imgUrlSelect: '/img/head/tab7-1.png'},
         {key: '8', title:'我的', imgUrl: '/img/head/tab8.png', imgUrlSelect: '/img/head/tab8-1.png'},

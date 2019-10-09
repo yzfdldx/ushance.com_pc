@@ -1,0 +1,155 @@
+li, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#build-material {
+  width: 1200px;
+  min-height: 900px;
+  // padding: 20px 0 20px;
+  margin: 0 auto;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+  .ant-col{
+    text-align: center;
+  }
+  .card {
+    background: #fff;
+    margin: 10px;
+    width: 95%;
+    height: 370px;
+    padding: 15px 0px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: none;
+    cursor: pointer;
+
+    .img-header {
+      width: 200px;
+      height: 230px;
+    }
+
+    .title {
+      width: 150px;
+      height: 40px;
+      font-size: 14px;
+      color: #333;
+      line-height: 20px;
+      overflow: hidden;
+      margin: 16px auto;
+    }
+
+    .price {
+      font-size: 18px;
+      color: #FF0036;
+      line-height: 18px;
+      margin: 10px auto;
+    }
+  }
+
+  .card:hover {
+    border: 1px solid rgb(299, 299, 299);
+    box-shadow: rgb(213, 210, 210) 0px 0px 10px;
+  }
+
+  .load-more {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .ant-empty {
+    padding-top: 300px;
+  }
+}
+
+// 详情页
+#card-detail {
+  width: 1200px;
+  min-height: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 32px 16px;
+  h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    font-family: "microsoft yahei";
+  }
+
+  .header {
+    display: flex;
+
+    .header-left {
+      width: 420px;
+      border: 1px solid rgba(0,0,0,.05);
+    }
+
+    .header-right {
+      flex: 1;
+      padding: 0 0 0 30px;
+      position: relative;
+
+      .box {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+      }
+
+      .shop-panel {
+        border: 1px dotted #c9c9c9;
+        border-width: 1px 0;
+        margin: -1px 0 0 0;
+        padding: 10px 0;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+        display: flex;
+
+        .shop-item {
+          float: left;
+          text-align: center;
+          position: relative;
+          left: -1px;
+          border-left: 1px solid #e5dfda;
+          flex: 1;
+          line-height: 16px;
+
+          .shop-label {
+            display: inline-block;
+            line-height: 16px;
+            height: 16px;
+            color: #999;
+          }
+
+          .shop-count {
+            display: inline-block;
+            line-height: 16px;
+            height: 16px;
+            color: #FF0036;
+            font-weight: 700;
+            margin-left: 3px;
+          }
+        }
+      }
+
+      .box-footer {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+    }
+  }
+
+  .center {
+    margin-top: 40px;
+
+    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-wrap {
+      // text-align: center;
+    }
+
+  }
+}

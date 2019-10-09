@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from './card';
-import { Row, Col, Spin, Tag } from 'antd';
+import { Row, Col, Spin, Tag, Icon } from 'antd';
 import { data, tagsFromList } from './serverData.js';
 
 import './tabPage.less';
@@ -17,20 +17,19 @@ class TabPage extends Component {
       searchDatas: [], // 搜索到的数据
       searchType: false, // 搜索打标,
       tagsFromServer: [],
-      Id: [],
+      Id: '',
     };
   }
   componentDidMount () {
     const { params: { key } } = this.props;
-    const KList = key.split('-');
     this.setState({
-      Id: KList,
+      Id: key,
       loading: false,
     });
     try {
       this.setState({
-        cardDatas: data[KList[1]] ? data[KList[1]] : [],
-        tagsFromServer: tagsFromList[KList[1]] ? tagsFromList[KList[1]] : [],
+        cardDatas: data[key] ? data[key] : [],
+        tagsFromServer: tagsFromList[key] ? tagsFromList[key] : [],
       });
     } catch (error) {
       //
@@ -42,8 +41,6 @@ class TabPage extends Component {
         loading: true,
       });
       let { key } = nextProps.params;
-      const KList = key.split('-');
-      key = KList[0];
       setTimeout(() => {
         this.setState({
           selectedTags: [],
@@ -55,7 +52,7 @@ class TabPage extends Component {
   }
   handleChange = (tag, checked) => {
     const { selectedTags, cardDatas, Id } = this.state;
-    const oldCardData = data[Id[1]];
+    const oldCardData = data[Id];
     const nextSelectedTags = checked ? [tag] : selectedTags.filter(t => t !== tag);
     this.setState({
       loading: true,
@@ -85,8 +82,7 @@ class TabPage extends Component {
     const { selectedTags } = this.state;
     return (
       <div style={{ marginBottom: 20, marginTop: '32px' }}>
-        {/* <h5 style={{ margin: '0px 8px 20px 10px', display: 'inline'  }}>分类导航:</h5> */}
-        {['全部', '材料检测', '生物检测', '医学检测', '环境检测'].map(tag => (
+        {this.state.tagsFromServer.map(tag => (
           <CheckableTag
             key={tag}
             checked={selectedTags.indexOf(tag) > -1}
@@ -96,7 +92,7 @@ class TabPage extends Component {
           </CheckableTag>
         ))}
         <br/>
-        {this.state.tagsFromServer.map(tag => (
+        {['全部', '材料检测', '生物检测', '医学检测', '环境检测'].map(tag => (
           <CheckableTag
             key={tag}
             checked={selectedTags.indexOf(tag) > -1}
@@ -121,31 +117,30 @@ class TabPage extends Component {
     </div>
   );
   // 全部、其他列表
-  datasHtml = (cardDatas) => (<Row>{cardDatas.map((item, index) => (<Col key={index} span={6}><Card {...this.props} data={item} /></Col>))}</Row>)
-  // releaseRequirement发布需求
-  releaseRequirement = () => (
-    <div className="release-box">
-      <div className="release-left">如果找不到仪器，您可以问呗发布，或者点击发布订单</div>
-      <div className="release-right">
-        <a href="#/jiedanTabPageDetail/发布新订单" style={{ textDecoration: 'none' }}>
-          <div className="release-jump">发布订单</div>
-        </a>
-      </div>
-    </div>
-  )
+  datasHtml = (cardDatas) => (cardDatas.map((item, index) => (<Col key={index} span={6}><Card {...this.props} data={item} /></Col>)))
   render() {
-    const { cardDatas, searchDatas, loading, searchType } = this.state;
-    return (<div id="tab_page_cardList">
+    const { cardDatas, searchDatas, loading, searchType, Id } = this.state;
+    return (<div className="jiedan_cardList">
       {this.checkableTagHtml()}
       <Spin spinning={loading}>
         <div style={{ padding: '0 8px'}}>
           {searchType ?
             this.searchDatasHtml(searchDatas) : null}
           {searchType ? <Row style={{ marginLeft: 10 }}>其他结果：</Row> : null}
-          {this.datasHtml(cardDatas)}
+          <Row>
+            {this.datasHtml(cardDatas)}
+            {
+              Id === '问呗' ? <Col key={-1} span={6}>
+                <div className="jiedan_cardList_card" onClick={() => { window.location.href = `#/jiedanTabPageDetail/发布新订单` }}>
+                  <Icon type="plus" />
+                  <br/>
+                  <span>发布订单</span>
+                </div>  
+              </Col> : null
+            }
+          </Row>
         </div>
       </Spin>
-      {this.releaseRequirement()}
     </div>);
   }
 }
