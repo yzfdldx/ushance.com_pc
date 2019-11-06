@@ -9,12 +9,12 @@ class TabSearch extends PureComponent {
     return (
       <div className="tab-search">
         <Search
-          style={{ width: 322 }}
+          style={{ width: '332px' }}
           placeholder="输入商品标题或订单号进行搜索"
           enterButton="订单搜索"
-          onSearch={value => console.log(value)}
+          onSearch={(e)=>{this.props.backFn(e)}}
         />
-        <span style={{ marginLeft: 20 }}>更多筛选条件<Icon type="down" /></span>
+        {/* <span style={{ marginLeft: 20 }}>更多筛选条件<Icon type="down" /></span> */}
       </div>
     );
   }

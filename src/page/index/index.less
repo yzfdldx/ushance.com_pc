@@ -37,6 +37,8 @@
       line-height: 600px;
       background: rgb(255,195,124);
       overflow: hidden;
+      position: relative;
+      z-index: 10;
       img{
         width: 1200px;
         height: 600px;
@@ -108,9 +110,9 @@
         margin-top: 5px;
         overflow: hidden;
         // background: blue;
-        .slick-list{
-          overflow: visible;
-        }
+        // .slick-list{
+        //   overflow: visible;
+        // }
         .ant-carousel .slick-slide {
           text-align: center;
           height: 36px;
@@ -124,11 +126,8 @@
             white-space:nowrap;
             overflow:hiddlen;
             text-overflow:ellipsis;
-            // display: -webkit-box;
-            // -webkit-box-orient: vertical;
-            // -webkit-line-clamp:1;
-            // overflow:hiddlen;
-            // text-overflow:ellipsis;
+            position: relative;
+            z-index: 2;
           }
         }
       }

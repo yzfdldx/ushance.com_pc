@@ -63,7 +63,7 @@ class TabPageDetail extends Component {
   okFn = () => {
     message.success('接单成功');
     setTimeout(() => {
-      location.hash = `#/jiedanCardList/帮呗`;
+      location.hash = `#/jiedan/jiedanCardList/帮呗`;
     }, 1000)
   }
   calFn = () => {

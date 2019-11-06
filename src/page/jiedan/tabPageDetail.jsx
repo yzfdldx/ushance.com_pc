@@ -63,7 +63,7 @@ class TabPageDetail extends Component {
   okFn = () => {
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        window.location.href = "#/TabPageDetail_resee/0"
+        window.location.href = "#/jiedan/TabPageDetail_resee/0"
       }
     });
   }

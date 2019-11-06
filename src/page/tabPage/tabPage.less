@@ -6,6 +6,7 @@
   // display: flex;
   // flex-wrap: wrap;
   // justify-content: space-between;
+  // cursor: not-allowed
   .ant-col{
     text-align: center;
   }
@@ -19,7 +20,17 @@
     display: inline-block;
     border: 1px solid rgb(255, 255, 255);
     box-shadow: none;
-
+    position: relative;
+    .card_none{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background: rgba(100, 100, 100, 0.6);
+      line-height: 368px;
+      font-size: 20px;
+      color: white;
+    }
     .img-header {
       width: 180px;
       height: 180px;
@@ -380,6 +391,49 @@
     }
   }
 
-
-
+  // 保密协议
+  .baomi{
+    width: 1200px;
+    margin: auto;
+    background: white;
+    min-height: 600px;
+    padding: 32px 16px;
+    .baomi_title{
+      font-size: 30px;
+      text-align: center;
+      color: black;
+      line-height: 60px;
+    }
+    .baomi_title2{
+      font-size: 24px;
+      text-align: center;
+      color: black;
+      line-height: 40px;
+    }
+    .baomi_center1{
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+      line-height: 30px;
+      padding: 5px 0;
+    }
+    .baomi_center2{
+      color: #666;
+      font-size: 16px;
+      line-height: 22px;
+    }
+    .baomi_center3{
+      color: #666;
+      font-size: 16px;
+      line-height: 22px;
+      text-indent: 2em;
+    }
+    .baomi_word{
+      color: #666;
+      font-size: 16px;
+      line-height: 22px;
+      text-indent: 2em;
+      padding: 8px 0;
+    }
+  }
 }

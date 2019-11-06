@@ -10,6 +10,7 @@ import {
   Button,
   AutoComplete,
   Cascader,
+  Spin
 } from 'antd';
 
 import reqwest from 'reqwest';
@@ -21,15 +22,14 @@ class AdressForm extends PureComponent {
   state = {
     confirmDirty: false,
     shopData: [],
+    loading: false,
   };
-
   componentDidMount() {
     this.getShopData();
   }
-
   getShopData = () => {
     reqwest({
-      url: 'http://149.129.177.101/web/index/city.json',
+      url: `${window.imgSrc}/web/index/city.json`,
       method: 'get',
       data: {},
       success: (res) => {
@@ -44,25 +44,43 @@ class AdressForm extends PureComponent {
       }
     })
   }
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const { User } = this.props;
+        if (!User) return;
+        this.setState({
+          loading: true,
+        });
+        reqwest({
+          url: `${window.imgSrc}/web/index/my/editAddress.json`, // https://www.ushance.com
+          method: 'post',
+          data: {
+            id: User.USE_ID,
+            address: JSON.stringify(values),
+          },
+          success: (res) => {
+            this.setState({
+              loading: false,
+            });
+            if (res.result === 'succeed') {
+              location.reload();
+            } else {
+              message.error(res.message || '请求异常');
+            }
+          }
+        })
       }
     });
   };
-
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
-
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { shopData } = this.state;
-
+    const { shopData, loading } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -85,16 +103,7 @@ class AdressForm extends PureComponent {
         },
       },
     };
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '86',
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>,
-    );
-
-    return (
+    return (<Spin tip="Loading..." spinning={loading}>
       <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{ marginTop: 20 }}>
         <Form.Item
           label={
@@ -103,14 +112,14 @@ class AdressForm extends PureComponent {
             </span>
           }
         >
-          {getFieldDecorator('residence', {
+          {getFieldDecorator('address', {
             rules: [
               { type: 'array', required: true, message: '这里不能为空' },
             ],
           })(<Cascader options={shopData} placeholder="请输入地址信息" />)}
         </Form.Item>
         <Form.Item label="详细地址">
-          {getFieldDecorator('adress1', {
+          {getFieldDecorator('detail', {
             rules: [
               {
                 required: true,
@@ -124,16 +133,6 @@ class AdressForm extends PureComponent {
           })(<TextArea  placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息"
             autosize={{ minRows: 2, maxRows: 6 }}
           />)}
-        </Form.Item>
-        <Form.Item label="邮政编码">
-          {getFieldDecorator('Gender', {
-            rules: [
-              {
-                required: true,
-                message: '这里不能为空',
-              },
-            ],
-          })(<Input placeholder="请输入邮政编码" />)}
         </Form.Item>
         <Form.Item label="收货人姓名">
           {getFieldDecorator('name', {
@@ -152,10 +151,10 @@ class AdressForm extends PureComponent {
         <Form.Item label="手机号码">
           {getFieldDecorator('phone', {
             rules: [{ required: true, message: '请输入手机号码' }],
-          })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} placeholder="电话号码、手机号码必须填一项" />)}
+          })(<Input style={{ width: '100%' }} placeholder="电话号码、手机号码必须填一项" />)}
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          {getFieldDecorator('agreement', {
+          {getFieldDecorator('default', {
             valuePropName: 'checked',
           })(
             <Checkbox>设置为默认收货地址</Checkbox>,
@@ -167,7 +166,7 @@ class AdressForm extends PureComponent {
           </Button>
         </Form.Item>
       </Form>
-    );
+    </Spin>);
   }
 }
 

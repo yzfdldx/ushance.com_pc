@@ -16,11 +16,10 @@ import Index from './page/index/index.jsx';
 import TabPage from './page/tabPage/tabPage';
 // 设备列表
 import CardList from './page/tabPage/cardList';
-// 详情页
 import TabPageDetail from './page/tabPageDetail/tabPageDetail';
 import TabPageDetail_resee from './page/tabPageDetail/tabPageDetail_resee';
-
 import Order from './page/order/order';
+import OrderBuy from './page/tabPageDetail/buy/index.jsx';
 
 // 接单页面模块
 import jiedanCardList from './page/jiedan/cardList';
@@ -37,6 +36,7 @@ import MyBillOrider from './page/myPage/billOrder/index.jsx';
 import MyReceipt from './page/myPage/receipt/index.jsx';
 import MyDevice from './page/myPage/device/index.jsx';
 import MyInvoice from './page/myPage/invoice/index.jsx';
+import Mydetail from './page/myPage/detail.jsx';
 // 商城
 import ShopBuildMaterial from './page/shopPage/buildMaterial/index.jsx';
 import ShopBuildCardDetail from './page/shopPage/buildMaterial/cardDetail.jsx';
@@ -45,7 +45,7 @@ import ShopBuy from './page/shopPage/buy/index.jsx';
 // import {dva} from 'yzf-react-storage';
 // import admin_models from './models/admin_models.jsx';
 // import bookstores_models from './models/bookstores_models.jsx';
-
+// window.imgSrc = 'http://localhost:80';
 window.imgSrc = 'https://www.ushance.com'; // getComponent https://www.ushance.com
 
 const RouteApp = () => (<Router history={hashHistory}>
@@ -54,15 +54,17 @@ const RouteApp = () => (<Router history={hashHistory}>
   <Route path='/' component={Menu}>
     <Route path='/index' component={Index} />
     <Route path='/TabPage/:key' component={TabPage} />
-    <Route path='/CardList/:key' component={CardList} />
-    <Route path='/TabPageDetail/:name' component={TabPageDetail} />
-    <Route path='/TabPageDetail_resee/:name' component={TabPageDetail_resee} />
-    <Route path='/Order/:name' component={Order} />
+    {/* 设备共享 */}
+    <Route path='/shebei/CardList/:key' component={CardList} />
+    <Route path='/shebei/TabPageDetail/:name' component={TabPageDetail} />
+    <Route path='/shebei/TabPageDetail_resee/:name' component={TabPageDetail_resee} />
+    <Route path='/shebei/Order/:name' component={Order} />
+    <Route path='/shebei/Order/buy/:id' component={OrderBuy} />
     {/* 接单模块 */}
-    <Route path='/jiedanCardList/:key' component={jiedanCardList} />
-    <Route path='/jiedanTabPageDetail/:name' component={jiedanTabPageDetail} />
-    <Route path='/jiedanTabPageDetail_resee/:name' component={jiedanTabPageDetail_resee} />
-    <Route path='/jiedantabPageDetail_tosee/:name' component={jiedantabPageDetail_tosee} />
+    <Route path='/jiedan/jiedanCardList/:key' component={jiedanCardList} />
+    <Route path='/jiedan/jiedanTabPageDetail/:name' component={jiedanTabPageDetail} />
+    <Route path='/jiedan/jiedanTabPageDetail_resee/:name' component={jiedanTabPageDetail_resee} />
+    <Route path='/jiedan/jiedantabPageDetail_tosee/:name' component={jiedantabPageDetail_tosee} />
     {/* 我的页面模块 */}
     <Route path='/MyPage/Information' component={MyInformation} />
     <Route path='/MyPage/Adress' component={MyAdress} />

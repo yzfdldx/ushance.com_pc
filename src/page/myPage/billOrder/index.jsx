@@ -13,7 +13,7 @@ class Order extends PureComponent {
     return (
       <Index>
         <div id="bill-order">
-          <ListTable />
+          {/* <ListTable /> */}
         </div>
       </Index>
     );

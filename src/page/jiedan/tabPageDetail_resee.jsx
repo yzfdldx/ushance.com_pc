@@ -54,7 +54,7 @@ class TabPageDetail extends Component {
   }
   okFn = () => {
     const { id } = this.state;
-    window.location.href = `#/jiedantabPageDetail_tosee/${id}`;
+    window.location.href = `#/jiedan/jiedantabPageDetail_tosee/${id}`;
   }
   calFn = () => {
     history.go(-1);

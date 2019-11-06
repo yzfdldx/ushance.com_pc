@@ -3,7 +3,8 @@ import {} from 'antd';
 import './index.less';
 
 import Index from '../index.jsx';
-import ListTable from '../component/listTable/listTable.jsx';
+// import ListTable from '../component/listTable/listTable.jsx';
+import ListTable from './listTable/listTable.jsx';
 
 class Order extends PureComponent {
 

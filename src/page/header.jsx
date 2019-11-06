@@ -41,10 +41,11 @@ class App extends React.Component {
         {key: '2', title:'仿真模拟', imgUrl: '/img/head/tab2.png', imgUrlSelect: '/img/head/tab2-1.png'},
         {key: '3', title:'数据分析', imgUrl: '/img/head/tab3.png', imgUrlSelect: '/img/head/tab3-1.png'},
         {key: '4', title:'建材检测', imgUrl: '/img/head/tab4.png', imgUrlSelect: '/img/head/tab4-1.png'},
-        {key: '5', title:'接单', imgUrl: '/img/head/tab5.png', imgUrlSelect: '/img/head/tab5-1.png'},
+        {key: '5', title:'接单/发单', imgUrl: '/img/head/tab5.png', imgUrlSelect: '/img/head/tab5-1.png'},
         {key: '6', title:'商城', imgUrl: '/img/head/tab6.png', imgUrlSelect: '/img/head/tab6-1.png'},
         {key: '7', title:'合作', imgUrl: '/img/head/tab7.png', imgUrlSelect: '/img/head/tab7-1.png'},
         {key: '8', title:'我的', imgUrl: '/img/head/tab8.png', imgUrlSelect: '/img/head/tab8-1.png'},
+        // {key: '9', title:'保密协议', imgUrl: '/img/head/tab9.png', imgUrlSelect: '/img/head/tab9-1.png'},
       ],
       value: null,
       LoadModelVisible: false,
@@ -54,7 +55,6 @@ class App extends React.Component {
   }
   componentDidMount () {
     const UseData = GetCookie('UseData');
-    // console.log('UseData', UseData)
     if (UseData) {
       try {
         SetCookie('UseData', UseData, 60 * 60 * 1000)
@@ -117,9 +117,36 @@ class App extends React.Component {
   }
   init = (next) => {
     const { params: { key } } = next;
-    this.setState({
-      value: key,
-    })
+    const Arr = next.location.pathname.split('/');
+    if (Arr[1] === 'TabPage') {
+      this.setState({
+        value: key,
+      })
+    } else if (Arr[1] === 'shebei') { // 设备共享
+      this.setState({
+        value: '1',
+      })
+    } else if (Arr[1] === 'jiedan') { // 接单
+      this.setState({
+        value: '5',
+      })
+    } else if (Arr[1] === 'ShopPage') { // 商城
+      this.setState({
+        value: '6',
+      })
+    } else if (Arr[1] === 'MyPage') { // 我的
+      this.setState({
+        value: '8',
+      })
+    } else if (Arr[1] === 'baomi') { // 保密协议
+      this.setState({
+        value: '9',
+      })
+    } else {
+      this.setState({
+        value: null,
+      })
+    }
   }
   tabChange = (key) => {
     this.setState({
@@ -192,7 +219,15 @@ class App extends React.Component {
                   登录
                 </span>
                 <span> / </span>
-                <span onClick={()=>{this.setState({RegisterModelVisible: true})}}>注册</span>
+                <span
+                  onClick={()=>{
+                    if (window.baomiOnoff) {
+                      this.setState({RegisterModelVisible: true})
+                    } else {
+                      location.hash = `/TabPage/${9}`;
+                    }
+                  }}
+                >注册</span>
               </span>
             }
           </div>

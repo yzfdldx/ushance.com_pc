@@ -402,9 +402,9 @@ class App extends React.Component {
                     <p>{item.nate}</p>
                   </div>
                   <div className="index_shiyan_card_center">
-                    <div style={{height: '30px'}}>
+                    <div style={{height: '30px', position: 'relative', zIndex: '2'}}>
                       {
-                        item.list.length > 4 ? <Carousel dots={false} autoplay dotPosition="left">
+                        item.list.length > 4 ? <Carousel slidesToShow={5} dots={false} autoplay dotPosition="left">
                           {
                             item.list.map((e, k) => <Row key={k} className="index_shiyan_card_center_list">
                               <Col span="8">
@@ -417,7 +417,7 @@ class App extends React.Component {
                                 {e.time}
                               </Col>
                               <Col span="8">
-                                {e.a ? <a href="#/">{e.pay}</a> : e.pay}
+                                {e.a ? <a style2={{ position: 'relative', zIndex: '1000000' }} href="#/jiedan/jiedanTabPageDetail_resee/XRD">{e.pay}</a> : e.pay}
                               </Col>
                             </Row>)
                           }
@@ -447,14 +447,14 @@ class App extends React.Component {
             }
           </Row>
           <div className="index_shiyan_button">
-            <Button>加入我们</Button>
+            <Button onClick={() => { window.location.href = "#/jiedan/jiedanCardList/帮呗" }}>快来抢单</Button>
           </div>
         </div>
       </div>
       <div className="index_liu">
         <div>
           <h3>服务流程</h3>
-          <p>流程化管理，全面方位服务各类科研实验</p>
+          <p>标准化管理，全方位、全流程服务各类科研实验</p>
           <div style={{paddingTop: '30px'}}>
           <Tabs defaultActiveKey="0" tabPosition="left">
             {

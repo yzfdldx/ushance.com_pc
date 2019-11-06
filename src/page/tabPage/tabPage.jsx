@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import Card from './card';
-import { Table, Tag } from 'antd';
+import { Table, Tag, message } from 'antd';
 import { data } from './serverData.js';
-
+import { baomiFn } from './baomi.jsx';
+ 
 import './tabPage.less';
+
+const GetCookie = (name) => { // 获取cookie
+  let start;
+  let end;
+  if (document.cookie.length > 0) {
+    start = document.cookie.indexOf(`${name}=`); // name + "="
+    if (start !== -1) {
+      start = start + name.length + 1;
+      end = document.cookie.indexOf(";", start); // eslint-disable-line
+      if (end === -1) end = document.cookie.length;
+      return unescape(document.cookie.substring(start, end));
+    }
+  }
+  return '';
+};
 
 const { CheckableTag } = Tag;
 const tagsFromServer = ['全部', '能谱类', '电镜类', '热分析类', '吸附类', '波谱类', '光谱类', '色谱质谱类', '成分分析类', '物理性能测试'];
@@ -72,19 +88,19 @@ class TabPage extends Component {
         card: [
           {
             name: '环境检测',
-            // clickUrl: '#CardList/设备共享/环境检测',
+            clickUrl: '#shebei/CardList/设备共享-环境检测',
             list: ['土类 水类', '气体类']
           },  {
             name: '医学检测',
-            // clickUrl: '#CardList/设备共享/医学检测',
+            clickUrl: '#shebei/CardList/设备共享-医学检测',
             list: ['血细胞分析仪', '电解质分析仪']
           }, {
             name: '生物检测',
-            // clickUrl: '#CardList/设备共享/生物检测',
+            clickUrl: '#shebei/CardList/设备共享-生物检测',
             list: ['TEM SEP', '荧光定量PCR']
           }, {
             name: '材料检测',
-            clickUrl: '#CardList/设备共享-材料检测',
+            clickUrl: '#/shebei/CardList/设备共享-材料检测',
             list: ['XRD XPS', 'SEM TEM']
           }
         ],
@@ -157,7 +173,7 @@ class TabPage extends Component {
         baseB: 22,
         height: 70,
         baseHeight: 88,
-        card: [{name: '问呗', clickUrl: '#jiedanCardList/问呗'}, {name: '帮呗', clickUrl: '#jiedanCardList/帮呗'}],
+        card: [{name: '发单', clickUrl: '#/jiedan/jiedanCardList/问呗'}, {name: '接单', clickUrl: '#/jiedan/jiedanCardList/帮呗'}],
       }, {
         img: '/img/background/img/5.png',
         background: '/img/background/6/back1.png',
@@ -211,7 +227,7 @@ class TabPage extends Component {
   componentDidMount () {
     const { params: { key } } = this.props;
     this.setState({
-      cardDatas: data[key],
+      // cardDatas: data[key],
       loading: false,
       Height: window.innerHeight - 220,
     });
@@ -230,7 +246,7 @@ class TabPage extends Component {
       setTimeout(() => {
         this.setState({
           selectedTags: [],
-          cardDatas: data[key],
+          // cardDatas: data[key],
           loading: false,
         });
       }, 300);
@@ -398,6 +414,9 @@ class TabPage extends Component {
     }))
     return <Table bordered showHeader={false} pagination={false} columns={columns} dataSource={data} />
   }
+  baomi = () => {
+    return <div className="baomi">32</div>
+  }
   TableListFn = () => {
     const { cardDatas, searchDatas, loading, searchType, receiptTableData, spellList, Height } = this.state;
     const { params: { key } } = this.props;
@@ -406,7 +425,7 @@ class TabPage extends Component {
     const Rate = Height2 / 500;
     const Width2 = window.innerWidth < 1200 ? 1200 : window.innerWidth
     const Rate2 = Width2 / 1200;
-    const spellFn = (spell, K) => {
+    const spellFn = (spell, K, order) => {
       return <div className="index_spell" style={{height: `${Height2}px`, backgroundImage: `url(${window.imgSrc}${spell.background})`}}>
         <div className="index_spell_card">
           {
@@ -417,8 +436,11 @@ class TabPage extends Component {
               // debugger
               return (<div
                 onClick={() => {
-                  if (e.clickUrl) {
+                  const UseData = GetCookie('UseData');
+                  if ((e.clickUrl && !order) || (e.clickUrl && UseData)) {
                     window.location.href = e.clickUrl;
+                  } else if (e.clickUrl && order && !UseData) {
+                    message.warning('请先登录')
                   }
                 }}
                 key={k}
@@ -487,8 +509,12 @@ class TabPage extends Component {
             Dom = spellFn(spellList[6], 6);
           break;
       case '8':
-          Dom = spellFn(spellList[7], 7);
-        break;    
+          Dom = spellFn(spellList[7], 7, 'order');
+        break;
+      case '9':
+          // Dom = this.baomi();
+          Dom = baomiFn();
+        break;  
       default:
         Dom = ''
     }

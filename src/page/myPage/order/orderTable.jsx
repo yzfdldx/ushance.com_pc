@@ -66,8 +66,11 @@ const columns = [
     title: '支付状态',
     dataIndex: 'payment',
     key: 'payment',
-    width: 50,
-    render: (item) => (paymentName[item]),
+    width: 100,
+    render: (item) => <div>
+      <span>{paymentName[item]}</span>
+      <span></span>
+    </div>,
   },
   {
     title: '备注',
@@ -75,6 +78,14 @@ const columns = [
     key: 'message',
     width: 50,
     render: (item) => (item || '--'),
+  },
+  {
+    title: '操作',
+    key: 'order',
+    width: 50,
+    render: () => <div>
+      <span>取消订单</span>
+    </div>,
   },
 ];
 
@@ -84,18 +95,16 @@ class OrderTable extends PureComponent {
     loading: false,
     datas: [],
   };
-
   componentDidMount() {
     this.getData();
   }
-
   getData = () => {
     this.setState({
       loading: true,
     })
     const { finished } = this.props;
     const { USE_ID } = getCookie('App') && JSON.parse(getCookie('App')) || {};
-    const url = finished ? 'http://149.129.177.101/web/index/my/order/getFinishOrder.json' : 'http://149.129.177.101/web/index/my/order/getNowOrder.json';
+    const url = finished ? `${window.imgSrc}/web/index/my/order/getFinishOrder.json` : `${window.imgSrc}/web/index/my/order/getNowOrder.json`;
     reqwest({
       url,
       method: 'get',
@@ -103,6 +112,7 @@ class OrderTable extends PureComponent {
         id: USE_ID,
       },
       success: (res) => {
+        debugger
         if (res.result === 'succeed') {
           const datas = res.data;
           this.setState({
@@ -119,15 +129,12 @@ class OrderTable extends PureComponent {
       }
     })
   }
-
   onSelectChange = selectedRowKeys => {
     this.setState({ selectedRowKeys });
   }
-
   start = () => {
 
   }
-
   checkRender = () => {
     const { loading, selectedRowKeys } = this.state;
     const hasSelected = selectedRowKeys.length > 0;
@@ -142,7 +149,6 @@ class OrderTable extends PureComponent {
       </div>
     );
   }
-
   render() {
     const { selectedRowKeys, datas, loading } = this.state;
     const { finished } = this.props;

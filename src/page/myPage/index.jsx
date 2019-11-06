@@ -8,7 +8,6 @@ import TabSearch from './tabSearch.jsx';
 const { TabPane } = Tabs;
 
 class Index extends PureComponent {
-
   defaultSelectedKeys = () => {
     const hash = window.location.hash;
     const name = hash.split('/')[hash.split('/').length - 1].split('?')[0];
@@ -22,7 +21,6 @@ class Index extends PureComponent {
       return 'noPayOrder';
     }
   }
-
   tabsChange = (key) => {
     if (key === 'receipt') {
       location.hash = '#/MyPage/Receipt';
@@ -34,21 +32,19 @@ class Index extends PureComponent {
       location.hash = '#/MyPage/BillOrder';
     }
   }
-
   renderTab = () => {
     return (
       <Tabs defaultActiveKey={this.defaultSelectedKeys()} onChange={this.tabsChange}>
-        <TabPane tab="所有接单" key="receipt" />
+        <TabPane disabled tab="所有接单" key="receipt" />
         <TabPane tab="所有订单" key="order" />
         <TabPane tab="待付款" key="noPayOrder" />
-        <TabPane tab="待分享" key="4" />
-        <TabPane tab="待发货/试验" key="billOrder" />
-        <TabPane tab="待验收" key="6" />
-        <TabPane tab="待评价" key="7" />
+        {/* <TabPane tab="待分享" key="4" /> */}
+        <TabPane disabled tab="待发货/试验" key="billOrder" />
+        <TabPane disabled tab="待验收" key="6" />
+        <TabPane disabled tab="待评价" key="7" />
       </Tabs>
     );
   }
-
   render() {
     const { children } = this.props;
     return (
@@ -57,7 +53,7 @@ class Index extends PureComponent {
         <div className="my-tab">
           {this.renderTab()}
         </div>
-        {(this.defaultSelectedKeys() === 'order' || this.defaultSelectedKeys() === 'receipt') ? <TabSearch /> : null}
+        {/* {(this.defaultSelectedKeys() === 'order' || this.defaultSelectedKeys() === 'receipt') ? <TabSearch /> : null} */}
         <div className="main">
           <div className="right">
             {children}

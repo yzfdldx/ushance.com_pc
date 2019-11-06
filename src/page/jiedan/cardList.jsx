@@ -131,7 +131,7 @@ class TabPage extends Component {
             {this.datasHtml(cardDatas)}
             {
               Id === '问呗' ? <Col key={-1} span={6}>
-                <div className="jiedan_cardList_card" onClick={() => { window.location.href = `#/jiedanTabPageDetail/发布新订单` }}>
+                <div className="jiedan_cardList_card" onClick={() => { window.location.href = `#/jiedan/jiedanTabPageDetail/发布新订单` }}>
                   <Icon type="plus" />
                   <br/>
                   <span>发布订单</span>

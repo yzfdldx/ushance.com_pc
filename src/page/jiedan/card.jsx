@@ -3,7 +3,7 @@ import './tabPage.less';
 
 class Card extends PureComponent {
   cardClick = (title) => {
-    location.hash = `#/jiedanTabPageDetail_resee/${title}`;
+    location.hash = `#/jiedan/jiedanTabPageDetail_resee/${title}`;
   }
   render() {
     const { data, type } = this.props;
@@ -12,8 +12,8 @@ class Card extends PureComponent {
         <div onClick={() => this.cardClick(data.title)}>
           <div className="site">{data.site}</div>
           <div className="title">{data.title}</div>
-          <div className="sub-title">{data.number}</div>
-          <div className="time">{data.time}</div>
+          <div className="sub-title">{data.number}个样品</div>
+          <div className="time">{data.time}之前完成</div>
           <div className="price">
             <a onClick={() => this.cardClick(data.title)} className="btnbook">
               了解更多

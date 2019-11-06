@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Card, Icon, Button, Tag } from 'antd';
+import { Card, Icon, Button, Tag, message  } from 'antd';
 
 import './index.less';
 import reqwest from 'reqwest';
 import BuyModal from './buyModal.jsx';
 import PdBuyModal from './pdBuyModal.jsx';
+import { getCookie, setCookie } from '../../../common/util.js';
 
 class Buy extends PureComponent {
   constructor(props, context) {
@@ -15,10 +16,18 @@ class Buy extends PureComponent {
       selectKey: -1,
       buyVisible: false,
       pdBuyVisible: false,
+      shebeiOrderJson: {},
+      thisShebei: {},
     };
   }
   componentDidMount () {
-    this.getData();
+    const { params: { id } } = this.props;
+    const Json = getCookie('shebeiOrder') ? JSON.parse(getCookie('shebeiOrder')) : {};
+    this.setState({
+      shebeiOrderJson: Json,
+      thisShebei: Json[id] ? Json[id] : {},
+    });
+    // this.getData();
   }
   getData = () => {
     const { params: { name } } = this.props;
@@ -65,16 +74,21 @@ class Buy extends PureComponent {
     });
   }
   render() {
-    const { loading, data, buyVisible, pdBuyVisible } = this.state;
+    const {
+      loading, data, buyVisible, pdBuyVisible,
+      thisShebei
+    } = this.state;
     const gridStyle = {
       width: '25%',
     };
     const buyModalProps = {
       visible: buyVisible,
       onCancel: () => this.buyModalClick(false),
+      init: thisShebei,
     };
     const pdBuyModalProps = {
       visible: pdBuyVisible,
+      init: thisShebei,
       onCancel: () => this.pdBuyModalClick(false),
     };
     return (<div id="buy">
